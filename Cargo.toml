@@ -1,0 +1,48 @@
+[package]
+name        = "whisphub"
+version     = "0.1.0"
+edition     = "2021"
+authors     = ["Emilie Peretti"]
+description = "Command-line client for WhispHub — push your code from terminal."
+license     = "MIT"
+readme      = "README.md"
+repository  = "https://github.com/whispem/whisphub-cli"
+homepage    = "https://whisphub.dev"
+documentation = "https://github.com/whispem/whisphub-cli#readme"
+keywords    = ["cli", "whisphub", "code-sharing", "deploy", "upload"]
+categories  = ["command-line-utilities", "development-tools"]
+
+[[bin]]
+name = "whisphub"
+path = "src/main.rs"
+
+[dependencies]
+# CLI parsing
+clap        = { version = "4", features = ["derive"] }
+# Async runtime
+tokio       = { version = "1", features = ["macros", "rt-multi-thread", "time", "fs"] }
+# HTTP client (avec multipart pour les uploads de ZIP)
+reqwest     = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "multipart", "stream"] }
+# Serialization
+serde       = { version = "1", features = ["derive"] }
+serde_json  = "1"
+toml        = "0.8"
+# File system / config
+dirs        = "5"
+walkdir     = "2"
+# ZIP creation
+zip         = { version = "2", default-features = false, features = ["deflate"] }
+# Open browser
+webbrowser  = "1"
+# Errors
+anyhow      = "1"
+# Colored output
+colored     = "2"
+# Interactive prompts
+dialoguer   = "0.11"
+
+[profile.release]
+opt-level     = "z"
+lto           = true
+codegen-units = 1
+strip         = true
