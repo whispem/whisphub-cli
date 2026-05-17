@@ -3,11 +3,13 @@ use reqwest::Client;
 use serde::{Deserialize, Serialize};
 
 pub fn api_base() -> String {
-    std::env::var("WHISPHUB_API_URL").unwrap_or_else(|_| "https://whisphub.dev".to_string())
+    std::env::var("WHISPHUB_API_URL")
+        .unwrap_or_else(|_| "https://whisphubdev-production.up.railway.app".to_string())
 }
 
 pub fn frontend_base() -> String {
-    std::env::var("WHISPHUB_FRONTEND_URL").unwrap_or_else(|_| "https://whisphub.dev".to_string())
+    std::env::var("WHISPHUB_FRONTEND_URL")
+        .unwrap_or_else(|_| "https://whisphub.dev".to_string())
 }
 
 #[derive(Debug, Deserialize)]
